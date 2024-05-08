@@ -36,13 +36,13 @@ taskController.updateTask = async (req, res) => {
     try {
         // 요청 파라미터에 해당하는 특정 할일을 찾아서 업데이트하고, 업데이트된 할일 객체를 반환
         const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        const updatedTaskWithoutV = await updatedTask.select("-__v");
-        res.status(200).json({ status: "ok", data: updatedTaskWithoutV });
+        res.status(200).json({ status: "ok", data: updatedTask });
 
     } catch (err) {
         res.status(500).json({ status: "fail", error: err, message: err.message });
     }
 };
+
 
 // 특정 할일을 삭제
 taskController.deleteTask = async (req, res) => {

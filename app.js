@@ -15,26 +15,26 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
         console.log('MongoDB connected');
 
-        // test:
-        // 새로운 할일 생성
-        const newTask = new Task({
-            task: '새로운 할일3 생성', // 새로운 할일의 내용
-            isComplete: false // 완료 여부 설정 (기본값: false)
-        });
+        // // test:
+        // // 새로운 할일 생성
+        // const newTask = new Task({
+        //     task: '새로운 할일3 생성', // 새로운 할일의 내용
+        //     isComplete: false // 완료 여부 설정 (기본값: false)
+        // });
 
-        // 할일 저장
-        return newTask.save() // 새로운 할일을 데이터베이스에 저장하고 Promise 반환
-            .then((savedTask) => { // 저장된 할일 정보를 받아서 처리하는 부분
-                console.log('새로운 할일 저장되었습니다.');
-                console.log(savedTask);
+        // // 할일 저장
+        // return newTask.save() // 새로운 할일을 데이터베이스에 저장하고 Promise 반환
+        //     .then((savedTask) => { // 저장된 할일 정보를 받아서 처리하는 부분
+        //         console.log('새로운 할일 저장되었습니다.');
+        //         console.log(savedTask);
 
-                // 저장된 할일 검색
-                return Task.find({}).select("-__v"); // 저장된 모든 할일을 검색하고 Promise 반환
-            })
-            .then((tasks) => { // 검색된 할일 목록을 받아서 처리하는 부분
-                console.log('저장된 할일 목록:');
-                console.log(tasks);
-            });
+        //         // 저장된 할일 검색
+        //         return Task.find({}).select("-__v"); // 저장된 모든 할일을 검색하고 Promise 반환
+        //     })
+        //     .then((tasks) => { // 검색된 할일 목록을 받아서 처리하는 부분
+        //         console.log('저장된 할일 목록:');
+        //         console.log(tasks);
+        //     });
     })
 
 
