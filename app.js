@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const indexRounter = require("./routes/index")
 
+// bodyParser, indexRounter 사용
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use("/api", indexRounter);
 
 // MongoDB 연결
 const mongoURI = `mongodb://127.0.0.1:27017/todo-demo`
