@@ -6,7 +6,7 @@ const taskController = {};
 taskController.getTask = async (req, res) => {
     try {
         // 데이터베이스에서 모든 할일을 조회
-        const taskList = await Task.find({});
+        const taskList = await Task.find({}).select("-__v");
         res.status(200).json({ status: "ok", data: taskList })
 
     } catch (err) {
@@ -36,7 +36,8 @@ taskController.updateTask = async (req, res) => {
     try {
         // 요청 파라미터에 해당하는 특정 할일을 찾아서 업데이트하고, 업데이트된 할일 객체를 반환
         const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.status(200).json({ status: "ok", data: updatedTask })
+        const updatedTaskWithoutV = await updatedTask.select("-__v");
+        res.status(200).json({ status: "ok", data: updatedTaskWithoutV });
 
     } catch (err) {
         res.status(500).json({ status: "fail", error: err, message: err.message });

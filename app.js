@@ -18,7 +18,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
         // test:
         // 새로운 할일 생성
         const newTask = new Task({
-            task: '새로운 할일 생성', // 새로운 할일의 내용
+            task: '새로운 할일3 생성', // 새로운 할일의 내용
             isComplete: false // 완료 여부 설정 (기본값: false)
         });
 
@@ -29,7 +29,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
                 console.log(savedTask);
 
                 // 저장된 할일 검색
-                return Task.find({}); // 저장된 모든 할일을 검색하고 Promise 반환
+                return Task.find({}).select("-__v"); // 저장된 모든 할일을 검색하고 Promise 반환
             })
             .then((tasks) => { // 검색된 할일 목록을 받아서 처리하는 부분
                 console.log('저장된 할일 목록:');
