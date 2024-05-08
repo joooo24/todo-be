@@ -8,8 +8,9 @@ const taskSchema = mongoose.Schema({
     isComplete: {
         type: Boolean,
         required: true
-    }
-});
+    },
+},
+    { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);
 
