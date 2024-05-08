@@ -6,8 +6,8 @@ const app = express();
 app.use(bodyParser.json())
 
 // MongoDB 연결
-const mongoURI = `mongodb://localhost:27017/todo-demo`
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = `mongodb://127.0.0.1:27017/todo-demo`
+mongoose.connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
         console.log('MongoDB connected');
     })
