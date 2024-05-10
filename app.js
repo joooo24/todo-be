@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const indexRounter = require("./routes/index");
 const Task = require('./models/task');
+require('dotenv').config();
 const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD
-console.log("MONGODB_URI_PROD",MONGODB_URI_PROD)
+console.log("MONGODB_URI_PROD", MONGODB_URI_PROD)
 
 // bodyParser, indexRounter 사용
 const app = express();

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const taskController = require('./../controllers/taskcontroller');
+const taskController = require('./../controllers/task.controller');
 
 // GET /api/tasks - 모든 할일 조회
 router.get('/', taskController.getTask);
