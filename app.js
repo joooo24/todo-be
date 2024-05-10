@@ -3,14 +3,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const indexRounter = require("./routes/index");
 const Task = require('./models/task');
+const cors = require('cors');
+const app = express();
 require('dotenv').config();
 const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD
-console.log("MONGODB_URI_PROD", MONGODB_URI_PROD)
 
-// bodyParser, indexRounter 사용
-const app = express();
+// bodyParser, indexRounter, cors 사용
 app.use(bodyParser.json());
 app.use("/api", indexRounter);
+app.use(cors())
 
 // MongoDB 연결
 const mongoURI = MONGODB_URI_PROD
