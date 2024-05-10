@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const indexRounter = require("./routes/index");
 const Task = require('./models/task');
+const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD
+console.log("MONGODB_URI_PROD",MONGODB_URI_PROD)
 
 // bodyParser, indexRounter 사용
 const app = express();
@@ -10,7 +12,7 @@ app.use(bodyParser.json());
 app.use("/api", indexRounter);
 
 // MongoDB 연결
-const mongoURI = `mongodb://127.0.0.1:27017/todo-demo`
+const mongoURI = MONGODB_URI_PROD
 mongoose.connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
         console.log('MongoDB connected');
