@@ -1,4 +1,4 @@
-const Task = require('./../models/task');
+const Task = require('../models/task');
 
 const taskController = {};
 
@@ -18,7 +18,7 @@ taskController.getTask = async (req, res) => {
 taskController.createTask = async (req, res) => {
     // 클라이언트로부터 받은 요청의 데이터를 이용하여 새로운 할일 객체를 생성
     const task = new Task({
-        task: req.body.task, // 할일 내용을 할일 객체의 task 속성에 설정
+        task: req.body.task, // 할일 내용을 할일 객체의 task 속성에 설정node
         isComplete: req.body.isComplete || false // 완료 여부를 할일 객체의 isComplete 속성에 설정
     });
 
