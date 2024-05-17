@@ -9,9 +9,9 @@ require('dotenv').config();
 const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD
 
 // bodyParser, indexRounter, cors 설정
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/api", indexRounter);
-app.use(cors());
 
 // MongoDB 연결
 const mongoURI = MONGODB_URI_PROD
