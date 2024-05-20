@@ -15,7 +15,7 @@ app.use("/api", indexRounter);
 
 // MongoDB 연결
 const mongoURI = MONGODB_URI_PROD
-mongoose.connect(mongoURI, { useNewUrlParser: true })
+mongoose.connect(mongoURI)
     .then(() => {
         console.log('MongoDB connected');
 
