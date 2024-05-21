@@ -20,8 +20,8 @@ const userSchema = mongoose.Schema({
     { timestamps: true });
 
 // 토큰 생성
-userSchema.methods.generateToken = () => {
-    const token = jwt.sign({ _id: this._id }, JWT_SECRETE_KEY);
+userSchema.methods.generateToken = function () {
+    const token = jwt.sign({ _id: this._id }, JWT_SECRETE_KEY, { expiresIn: "1h" });
     return token;
 };
 
