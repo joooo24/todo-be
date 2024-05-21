@@ -41,7 +41,7 @@ userController.loginWithEmail = async (req, res) => {
     try {
         // email로 유저 정보 가져오기
         const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }, "-createdAt -updatedAt -__v");
 
         if (user) {
 

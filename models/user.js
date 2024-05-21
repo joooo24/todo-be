@@ -25,6 +25,13 @@ userSchema.methods.generateToken = function () {
     return token;
 };
 
+// 비밀번호 제거
+userSchema.methods.toJSON = function () {
+    const obj = this._doc;
+    delete obj.password
+    return obj
+}
+
 const User = mongoose.model('user', userSchema);
 module.exports = User;
 
