@@ -9,6 +9,13 @@ const taskSchema = mongoose.Schema({
         type: Boolean,
         required: true
     },
+    author: {
+        // 스키마 타입 중 ObjectId만 가져오기
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        // 참조 외래키
+        ref: "User"
+    },
 },
     { timestamps: true });
 
