@@ -8,16 +8,10 @@ userController.createUser = async (req, res) => {
     try {
         const { email, name, password } = req.body;
 
-        // 이메일 중복검사 및 빈 값 체크
+        // 이메일 중복 검사
         const user = await User.findOne({ email });
         if (user) {
             throw new Error("이미 가입이 된 유저입니다")
-        } else if (!email) {
-            throw new Error("입력된 이메일이 없습니다")
-        } else if (!password) {
-            throw new Error("입력된 비밀번호가 없습니다")
-        } else if (!name) {
-            throw new Error("입력된 이름이 없습니다")
         }
 
         // 비밀번호 암호화
