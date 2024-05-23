@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 // 서버 시작 - Express 애플리케이션이 리스닝할 포트를 설정하고 서버를 시작
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
