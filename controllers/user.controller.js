@@ -64,4 +64,24 @@ userController.loginWithEmail = async (req, res) => {
     }
 };
 
+// _id 값으로 유저 정보 가져오기
+userController.getUserData = async (req, res) => {
+    try {
+        // authController.authenticate에서 넘겨받은 userId
+        const { userId } = req;
+
+        const userData = await User.findById(userId)
+        console.log("### userData: ", userData)
+
+        if (!userId) {
+            throw new Error("유저를 찾을 수 없습니다.");
+        }
+
+        return res.status(200).json({ status: "success", userData })
+
+    } catch (err) {
+        res.status(400).json({ status: "fail", error: err, message: err.message });
+    }
+};
+
 module.exports = userController;

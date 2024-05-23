@@ -6,8 +6,8 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const authController = {};
 
-// 토큰으로 유저의 _id 가져온 후 해당 _id로 유저 객체 찾아서 보내주기
-authController.authenticate = async (req, res) => {
+// 토큰으로 유저의 _id 가져오기
+authController.authenticate = async (req, res, next) => {
     try {
 
         // 헤더에서 토큰 값 가져오기
@@ -35,18 +35,15 @@ authController.authenticate = async (req, res) => {
         // 디코딩된 토큰에서 유저의 _id를 추출
         const userId = decodedToken._id;
 
-        // 유저 객체를 찾아서 보내기
-        const userData = await User.findById(userId);
-        if (!userData) {
-            return res.status(404).json({ status: "fail", message: "유저를 찾을 수 없습니다." });
-        }
+        // req에 userId 항목 추가
+        req.userId = userId
 
-        res.status(200).json({ status: "success", userData })
+        next();
 
     } catch (err) {
         res.status(500).json({ status: "fail", error: err, message: err.message });
     }
-};
 
+};
 
 module.exports = authController;
