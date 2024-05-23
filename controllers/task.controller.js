@@ -5,10 +5,9 @@ const taskController = {};
 // 할일 목록을 조회
 taskController.getTask = async (req, res) => {
     try {
-        // 데이터베이스에서 모든 할일을 조회
-        const taskList = await Task.find({}).select("-__v");
-        res.status(200).json({ status: "ok", data: taskList })
-
+        // 데이터베이스에서 모든 할일을 조회 (author 참조하여 함께 조회 함) 
+        const taskList = await Task.find({}).populate('author', 'name email').select("-__v");
+        res.status(200).json({ status: "ok", data: taskList });
     } catch (err) {
         res.status(500).json({ status: "fail", error: err, message: err.message });
     }
@@ -18,8 +17,9 @@ taskController.getTask = async (req, res) => {
 taskController.createTask = async (req, res) => {
     // 클라이언트로부터 받은 요청의 데이터를 이용하여 새로운 할일 객체를 생성
     const task = new Task({
-        task: req.body.task, // 할일 내용을 할일 객체의 task 속성에 설정node
-        isComplete: req.body.isComplete || false // 완료 여부를 할일 객체의 isComplete 속성에 설정
+        task: req.body.task, // 할일 내용을 할일 객체의 task 속성에 설정
+        isComplete: req.body.isComplete || false, // 완료 여부를 할일 객체의 isComplete 속성에 설정
+        author: req.userId // 로그인한 사용자의 ID를 author에 설정
     });
 
     try {
@@ -43,7 +43,6 @@ taskController.updateTask = async (req, res) => {
     }
 };
 
-
 // 특정 할일을 삭제
 taskController.deleteTask = async (req, res) => {
     try {
@@ -61,7 +60,7 @@ taskController.deleteTaskAll = async (req, res) => {
     try {
         // 모든 할일을 찾아서 삭제
         await Task.deleteMany({});
-        res.status(200).json({ status: "ok", message: 'Task All deleted' })
+        res.status(200).json({ status: "ok", message: 'All tasks deleted' })
 
     } catch (err) {
         res.status(500).json({ status: "fail", error: err, message: err.message });

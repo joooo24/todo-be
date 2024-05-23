@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const taskController = require('./../controllers/task.controller');
+const authController = require('../controllers/auth.controller');
 
 // GET /api/tasks - 모든 할일 조회
 router.get('/', taskController.getTask);
 
-// POST /api/tasks - 새로운 할일 생성
-router.post('/', taskController.createTask);
+// POST /api/tasks - 유저 체크 후 -> 새로운 할일 생성
+router.post('/', authController.authenticate, taskController.createTask);
 
 // PUT /api/tasks/:id - 특정 할일 수정
 router.put('/:id', taskController.updateTask);
